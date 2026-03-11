@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TripTrust Safety Report — Tehran, Iran</title>
+<style>
+  :root {
+    --navy: #1e3a5f;
+    --navy-dark: #162d4a;
+    --navy-light: #2a4f7c;
+    --red: #c0392b;
+    --red-light: #f8d7da;
+    --orange: #e67e22;
+    --orange-light: #fef3e2;
+    --yellow: #f39c12;
+    --green: #27ae60;
+    --green-light: #d4edda;
+    --white: #ffffff;
+    --gray-50: #f8f9fa;
+    --gray-100: #f1f3f5;
+    --gray-200: #e9ecef;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --text: #2c3e50;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--gray-100);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
+    color: white;
+    padding: 60px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 70%, rgba(255,255,255,0.04) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-logo {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .hero-subtitle {
+    font-size: 18px;
+    opacity: 0.8;
+    margin-bottom: 28px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ── OVERALL RISK BANNER ── */
+  .risk-banner {
+    background: var(--red);
+    color: white;
+    text-align: center;
+    padding: 16px 24px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .risk-banner .subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    opacity: 0.9;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-top: 4px;
+  }
+
+  /* ── WAR WARNING BANNER ── */
+  .war-banner {
+    background: #1a0000;
+    border-left: 5px solid #ff0000;
+    color: #ff6b6b;
+    padding: 20px 24px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .war-banner strong {
+    color: #ff4444;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 16px;
+  }
+
+  .section-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-header .icon { font-size: 20px; }
+  .card-header h2 {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    flex: 1;
+  }
+  .card-body { padding: 24px; }
+
+  /* ── RISK BADGE ── */
+  .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-critical { background: var(--red); color: white; }
+  .badge-high { background: #e74c3c; color: white; }
+  .badge-medium { background: var(--orange); color: white; }
+  .badge-low { background: var(--green); color: white; }
+  .badge-extreme { background: #6c0000; color: white; }
+
+  /* ── RISK MATRIX ── */
+  .risk-matrix { width: 100%; border-collapse: collapse; margin-top: 8px; }
+  .risk-matrix th {
+    background: var(--gray-100);
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-600);
+    border-bottom: 2px solid var(--gray-200);
+  }
+  .risk-matrix td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+  .risk-matrix tr:last-child td { border-bottom: none; }
+
+  /* ── ADVISORY CARDS ── */
+  .advisory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 8px; }
+  .advisory-card {
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    border: 2px solid;
+  }
+  .advisory-card.critical { background: var(--red-light); border-color: var(--red); }
+  .advisory-card .country { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gray-600); margin-bottom: 6px; }
+  .advisory-card .level { font-size: 16px; font-weight: 800; color: var(--red); margin-bottom: 4px; }
+  .advisory-card .desc { font-size: 12px; color: var(--gray-700); }
+
+  /* ── LISTS ── */
+  ul.checklist { list-style: none; }
+  ul.checklist li { padding: 6px 0; padding-left: 24px; position: relative; font-size: 14px; }
+  ul.checklist li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  ul.checklist.warn li::before { content: '⚠'; color: var(--orange); }
+  ul.checklist.cross li::before { content: '✗'; color: var(--red); }
+
+  ul.plain li { padding: 5px 0; font-size: 14px; padding-left: 18px; position: relative; }
+  ul.plain li::before { content: '•'; position: absolute; left: 0; color: var(--navy); font-weight: 700; }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .callout-red { background: var(--red-light); border-left: 4px solid var(--red); }
+  .callout-orange { background: var(--orange-light); border-left: 4px solid var(--orange); }
+  .callout-green { background: var(--green-light); border-left: 4px solid var(--green); }
+  .callout strong { display: block; margin-bottom: 4px; }
+
+  /* ── DRONE SECTION ── */
+  .drone-verdict {
+    background: #1a0000;
+    border: 2px solid var(--red);
+    border-radius: 10px;
+    padding: 20px 24px;
+    text-align: center;
+    margin: 16px 0;
+  }
+  .drone-verdict .verdict-icon { font-size: 48px; margin-bottom: 8px; }
+  .drone-verdict .verdict-text { font-size: 22px; font-weight: 900; color: #ff4444; text-transform: uppercase; letter-spacing: 2px; }
+  .drone-verdict .verdict-sub { font-size: 13px; color: #ff9999; margin-top: 6px; }
+
+  /* ── HOTEL CARDS ── */
+  .hotel-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 12px; }
+  .hotel-card {
+    background: var(--gray-50);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .hotel-card h4 { font-size: 15px; color: var(--navy); margin-bottom: 4px; font-weight: 700; }
+  .hotel-card .stars { color: var(--yellow); font-size: 14px; margin-bottom: 8px; }
+  .hotel-card p { font-size: 13px; color: var(--gray-700); line-height: 1.5; }
+
+  /* ── EMERGENCY CONTACTS ── */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 8px; }
+  .contact-card {
+    background: var(--navy);
+    color: white;
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .contact-card .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 4px; }
+  .contact-card .number { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+  .contact-card .desc { font-size: 12px; opacity: 0.75; }
+
+  /* ── INFO ROW ── */
+  .info-row {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 14px;
+    align-items: flex-start;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row .label { font-weight: 600; color: var(--gray-700); min-width: 160px; flex-shrink: 0; }
+  .info-row .value { color: var(--text); flex: 1; }
+
+  /* ── TOP 5 RISKS ── */
+  .risk-list { counter-reset: risk-counter; list-style: none; }
+  .risk-list li {
+    counter-increment: risk-counter;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .risk-list li:last-child { border-bottom: none; }
+  .risk-num {
+    background: var(--red);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .risk-content strong { display: block; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .risk-content span { font-size: 13px; color: var(--gray-600); }
+
+  /* ── GONOGO ── */
+  .gonogo {
+    background: #1a0000;
+    border: 3px solid var(--red);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .gonogo .label { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #ff9999; margin-bottom: 8px; font-weight: 600; }
+  .gonogo .verdict { font-size: 36px; font-weight: 900; color: #ff4444; letter-spacing: 3px; }
+  .gonogo .reason { font-size: 13px; color: #ffaaaa; margin-top: 10px; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-top: 40px;
+  }
+  footer strong { color: rgba(255,255,255,0.8); }
+
+  h3 { font-size: 15px; color: var(--navy); margin: 16px 0 8px; font-weight: 700; }
+  p { font-size: 14px; line-height: 1.7; margin-bottom: 10px; color: var(--gray-700); }
+
+  @media (min-width: 640px) {
+    .section-grid { grid-template-columns: 1fr 1fr; }
+    .section-grid .full { grid-column: 1 / -1; }
+  }
+  @media (min-width: 900px) {
+    .section-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-logo">TripTrust · Travel Safety Intelligence</div>
+  <h1>Tehran, Iran</h1>
+  <div class="hero-subtitle">Business Travel Safety Report</div>
+  <div class="hero-meta">
+    <span class="hero-pill">📅 25 Mar – 22 Apr 2026 (28 days)</span>
+    <span class="hero-pill">🛂 Australian Passport</span>
+    <span class="hero-pill">💼 Business</span>
+    <span class="hero-pill">💰 Luxury Budget</span>
+  </div>
+  <span class="badge badge-critical" style="font-size:13px;padding:6px 20px;">⚠ OVERALL RISK: EXTREME</span>
+</div>
+
+<!-- RISK BANNER -->
+<div class="risk-banner">
+  🚨 DO NOT TRAVEL — DFAT Advisory Level 4 (Highest)
+  <div class="subtitle">Active military conflict: US–Israel strikes on Iran ongoing. Tehran has sustained direct hits. This trip is not recommended.</div>
+</div>
+
+<!-- WAR WARNING -->
+<div class="war-banner">
+  <strong>⚡ ACTIVE WAR SITUATION — Updated 11 March 2026</strong>
+  Israel and the United States launched large-scale military strikes on Iran beginning <strong>28 February 2026</strong>, targeting leadership compounds, nuclear facilities, ballistic missile sites, and armed forces. The IRGC building in <strong>Tehran was destroyed on 2 March 2026</strong>. Civilian infrastructure including hospitals, the Grand Bazaar, and the Golestan Palace have sustained damage. Iran has responded with hundreds of drones and ballistic missiles. The Australian Embassy in Tehran has <strong>shut down operations</strong>. DFAT is urging all Australians in Iran to leave immediately. Your proposed travel dates (25 Mar – 22 Apr 2026) fall within this active conflict.
+</div>
+
+<div class="container">
+<div class="section-grid">
+
+  <!-- 1. EXECUTIVE SUMMARY -->
+  <div class="card full">
+    <div class="card-header">
+      <span class="icon">📋</span>
+      <h2>1. Executive Summary</h2>
+      <span class="badge badge-critical">EXTREME RISK</span>
+    </div>
+    <div class="card-body">
+      <p>Iran is currently in an <strong>active military conflict</strong> with the United States and Israel. Strikes on Tehran began February 28, 2026 and are ongoing as of this report date (March 11, 2026). Multiple districts of Tehran have been struck, causing civilian casualties and damage to critical infrastructure. The Australian Embassy has suspended operations. There is no consular safety net for Australians on the ground.</p>
+      
+      <h3>Top 5 Risks for This Trip</h3>
+      <ol class="risk-list">
+        <li>
+          <div class="risk-num">1</div>
+          <div class="risk-content">
+            <strong>Active Military Strikes on Tehran</strong>
+            <span>US–Israel airstrikes have directly hit central Tehran. Risk of being caught in a strike is real and ongoing. The IRGC building, Grand Bazaar, and civilian areas have been hit.</span>
+          </div>
+        </li>
+        <li>
+          <div class="risk-num">2</div>
+          <div class="risk-content">
+            <strong>Arbitrary Detention / Hostage Risk</strong>
+            <span>Iran has a well-documented pattern of arresting Western passport holders — especially Australians — on espionage charges to use as diplomatic bargaining chips. Diplomatic relations with Australia have broken down (ambassador expelled Aug 2025).</span>
+          </div>
+        </li>
+        <li>
+          <div class="risk-num">3</div>
+          <div class="risk-content">
+            <strong>No Consular Protection</strong>
+            <span>The Australian Embassy in Tehran has shut down. If arrested, injured, or stranded, there is no Australian government presence to assist you.</span>
+          </div>
+        </li>
+        <li>
+          <div class="risk-num">4</div>
+          <div class="risk-content">
+            <strong>Complete Financial Isolation</strong>
+            <span>No international bank cards, credit cards, or ATMs work in Iran due to sanctions. You must carry all cash. In a war situation, access to any financial resources is severely restricted.</span>
+          </div>
+        </li>
+        <li>
+          <div class="risk-num">5</div>
+          <div class="risk-content">
+            <strong>Exit Route Risk</strong>
+            <span>Airports, border crossings, and transport infrastructure may be targeted or closed. Being trapped in an active war zone with no exit is a credible risk.</span>
+          </div>
+        </li>
+      </ol>
+
+      <div class="gonogo">
+        <div class="label">TripTrust Recommendation</div>
+        <div class="verdict">DO NOT GO</div>
+        <div class="reason">This trip should not proceed under any circumstances given the current active military conflict. Even if conditions improve before March 25, the unpredictability of the situation, absence of consular protection, and ongoing risk of arbitrary detention make this an unacceptable risk for any traveller. We strongly recommend postponing indefinitely and monitoring DFAT Smartraveller for advisory updates.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. SECURITY ASSESSMENT -->
+  <div class="card full">
+    <div class="card-header">
+      <span class="icon">🔐</span>
+      <h2>2. Security Assessment</h2>
+      <span class="badge badge-extreme">EXTREME</span>
+    </div>
+    <div class="card-body">
+      <div class="callout callout-red">
+        <strong>🔴 Active Conflict Zone — March 2026</strong>
+        US and Israeli forces have conducted sustained strikes on Iran since February 28, 2026. Iran has retaliated with drones and ballistic missiles against US bases in the region. The conflict is escalating.
+      </div>
+
+      <h3>Terrorism & Military Risk</h3>
+      <p>Tehran is directly experiencing military strikes. The IRGC Malek-Ashtar complex in the capital was destroyed March 2. Civilian areas including hospitals, the Grand Bazaar, and Golestan Palace have sustained damage. There is an active risk of being caught in strikes, crossfire, or infrastructure collapse.</p>
+
+      <h3>Arbitrary Detention — Critical Risk for Australians</h3>
+      <p>Iran systematically detains dual-nationals and Western passport holders on fabricated espionage, national security, or propaganda charges. Iran was designated as using Australians as diplomatic hostages. Australia expelled the Iranian Ambassador in August 2025 following intelligence confirming Iran directed covert attacks against Australia's Jewish community. Diplomatic relations are severed — there is no negotiating channel if you are detained.</p>
+      <ul class="checklist warn">
+        <li>Any photography, journalism, business research, or drone use can be framed as espionage</li>
+        <li>Social media, encrypted apps, and VPNs are monitored and restricted</li>
+        <li>Contact with foreign nationals or NGOs may attract IRGC attention</li>
+        <li>Business meetings may be surveilled</li>
+      </ul>
+
+      <h3>Civil Unrest</h3>
+      <p>Protests erupted across Iran in 2025 and continued into 2026. Security forces have killed protesters. During the current conflict, internal instability and government crackdowns are heightened.</p>
+
+      <h3>Crime & Scams Targeting Foreigners</h3>
+      <p>In normal times, Tehran's street crime is relatively low. However, war conditions create economic desperation. Foreigners carrying large amounts of cash (required due to sanctions) are at heightened robbery risk. Common pre-conflict scams included unofficial currency exchange fraud and "tourist guide" scams.</p>
+    </div>
+  </div>
+
+  <!-- 3. TRAVEL ADVISORIES -->
+  <div class="card full">
+    <div class="card-header">
+      <span class="icon">🌐</span>
+      <h2>3. Travel Advisories</h2>
+    </div>
+    <div class="card-body">
+      <div class="advisory-grid">
+        <div class="advisory-card critical">
+          <div class="country">🇦🇺 Australia (DFAT)</div>
+          <div class="level">DO NOT TRAVEL</div>
+          <div class="desc">Level 4 — Highest possible. Active conflict. DFAT urging Australians to leave immediately.</div>
+        </div>
+        <div class="advisory-card critical">
+          <div class="country">🇬🇧 UK (FCDO)</div>
+          <div class="level">DO NOT TRAVEL</div>
+          <div class="desc">Level 4. FCDO advises against all travel to Iran. Conflict escalation.</div>
+        </div>
+        <div class="advisory-card critical">
+          <div class="country">🇺🇸 US (State Dept)</div>
+          <div class="level">LEVEL 4: DO NOT TRAVEL</div>
+          <div class="desc">Highest level. Terrorism, risk of detention, armed conflict.</div>
+        </div>
+        <div class="advisory-card critical">
+          <div class="country">🇨🇦 Canada</div>
+          <div class="level">AVOID ALL TRAVEL</div>
+          <div class="desc">Canada advises against all travel to Iran. Active military conflict.</div>
+        </div>
+      </div>
+
+      <div class="callout callout-red" style="margin-top:16px;">
+        <strong>Note on Australian–Iran Relations</strong>
+        Australia expelled the Iranian Ambassador in August 2025 after intelligence confirmed Iran directed covert attacks on Australia's Jewish community. The Australian Embassy in Tehran has suspended operations during the current conflict. There is NO Australian consular support in-country.
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. ENTRY REQUIREMENTS -->
+  <div class="card full">
+    <div class="card-header">
+      <span class="icon">🛂</span>
+      <h2>4. Entry Requirements</h2>
+      <span class="badge badge-high">HIGH COMPLEXITY</span>
+    </div>
+    <div class="card-body">
+      <div class="callout callout-red">
+        <strong>⚠ Entry Not Recommended — Current Advisory</strong>
+        Entry into Iran is currently inadvisable due to active military conflict. The following information is provided for reference only and describes pre-conflict requirements.
+      </div>
+
+      <h3>Visa Requirements for Australians</h3>
+      <p>Australians require a visa to enter Iran. Options under normal circumstances:</p>
+      <ul class="plain">
+        <li><strong>E-Visa (Electronic):</strong> Apply via Iran's MFA portal. Receive a reference number; obtain visa stamp on arrival. Process takes 2–4 weeks. Cost approx. €75–100.</li>
+        <li><strong>Visa on Arrival:</strong> Available at Imam Khomeini International Airport (Tehran). Fees approx. €145. Not available to Australians in all circumstances — pre-approval recommended.</li>
+        <li><strong>Embassy Visa:</strong> Apply through an Iranian embassy with passport submission. Most reliable option.</li>
+      </ul>
+      <div class="callout callout-orange">
+        <strong>Critical Restriction for Australians</strong>
+        Following the diplomat expulsion in August 2025 and the current conflict, visa issuance for Australian passport holders may be suspended. Verify directly before any application.
+      </div>
+
+      <h3>Passport Requirements</h3>
+      <div class="info-row"><span class="label">Minimum Validity</span><span class="value">6 months beyond travel dates</span></div>
+      <div class="info-row"><span class="label">Blank Pages</span><span class="value">Minimum 2 blank visa pages required</span></div>
+      <div class="info-row"><span class="label">Israel Stamps</span><span class="value">Entry DENIED if passport contains Israeli stamps or entry evidence</span></div>
+      <div class="info-row"><span class="label">Return Ticket</span><span class="value">May be required to demonstrate onward travel</span></div>
+
+      <h3>Banned & Restricted Items at Customs</h3>
+      <ul class="checklist cross">
+        <li>Drones and UAV equipment (confiscated, possible arrest)</li>
+        <li>Alcohol (strictly banned)</li>
+        <li>Pork products</li>
+        <li>Satellite phones / certain communication equipment</li>
+        <li>Materials deemed anti-Islamic or politically sensitive</li>
+        <li>GPS devices without prior approval</li>
+        <li>Large amounts of foreign currency undeclared (declare everything over €10,000)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. HEALTH & MEDICAL -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🏥</span>
+      <h2>5. Health & Medical</h2>
+      <span class="badge badge-high">HIGH CONCERN</span>
+    </div>
+    <div class="card-body">
+      <h3>Recommended Vaccinations</h3>
+      <ul class="checklist">
+        <li>Hepatitis A & B</li>
+        <li>Typhoid</li>
+        <li>Tetanus / Diphtheria / Pertussis</li>
+        <li>Measles, Mumps, Rubella (MMR)</li>
+        <li>Polio (booster)</li>
+        <li>COVID-19 (up to date)</li>
+        <li>Influenza (seasonal)</li>
+        <li>Rabies (if working with animals)</li>
+      </ul>
+
+      <h3>Tehran Hospitals</h3>
+      <div class="callout callout-red">
+        <strong>⚠ War Impact on Healthcare</strong>
+        As of March 2026, WHO has confirmed at least 13 hospitals and health facilities have been hit or evacuated during the conflict. A hospital in Tehran was evacuated following nearby explosions. Medical capacity is severely strained.
+      </div>
+      <ul class="plain">
+        <li><strong>Milad Hospital</strong> — Largest hospital complex in Iran, Sheikh Fazlollah Expressway, Tehran</li>
+        <li><strong>Imam Khomeini Hospital</strong> — Major public hospital, central Tehran</li>
+        <li><strong>Iran-Mehr Hospital</strong> — Private, some English-speaking staff</li>
+        <li><strong>Moheb Mehr Hospital</strong> — Private, international patients</li>
+      </ul>
+
+      <h3>Travel Insurance</h3>
+      <div class="callout callout-red">
+        <strong>CRITICAL: Standard insurance is void in active war zones</strong>
+        Most travel insurance policies exclude coverage in conflict zones. Medical evacuation from Iran during active conflict is extremely difficult and potentially impossible. Specialist war zone insurance (e.g., Crisis24, AKE Group) would need to be arranged at substantial cost and may refuse Iran entirely given the current situation.
+      </div>
+
+      <h3>Other Health Considerations</h3>
+      <ul class="plain">
+        <li>Air quality in Tehran is poor — carry masks</li>
+        <li>Tap water: drink bottled water only</li>
+        <li>Medical supplies may be scarce due to conflict disruption</li>
+        <li>Carry sufficient prescription medications for the full trip</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6. DRONE LAWS -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🚁</span>
+      <h2>6. Drone Laws — Your Question Answered</h2>
+      <span class="badge badge-extreme">DO NOT BRING</span>
+    </div>
+    <div class="card-body">
+      <div class="drone-verdict">
+        <div class="verdict-icon">🚫</div>
+        <div class="verdict-text">Do NOT Bring Your Drone</div>
+        <div class="verdict-sub">Confiscation guaranteed. Arrest probable. Espionage charges possible.</div>
+      </div>
+
+      <h3>The Law</h3>
+      <p>The Civil Aviation Organization of Iran (CAOI) regulates drones. While drone use is technically regulated (not banned), the reality for foreign visitors — especially Australians — is far more dangerous:</p>
+      <ul class="checklist cross">
+        <li>Drones will be <strong>confiscated at customs</strong> — this is the standard outcome for tourists attempting to bring drones into Iran</li>
+        <li>Any drone over 300g requires a permit from Iranian authorities</li>
+        <li>Flying in Tehran is <strong>explicitly prohibited</strong> — the capital is a restricted zone</li>
+        <li>Flying near military zones, nuclear sites, police stations is <strong>a criminal offence</strong></li>
+        <li>Foreign visitors caught with unpermitted drones face arrest on suspicion of espionage</li>
+        <li>Multiple incidents exist of tourists being held for months on spy allegations from drone use</li>
+      </ul>
+
+      <h3>In an Active War Zone — The Stakes Are Higher</h3>
+      <div class="callout callout-red">
+        <strong>🔴 Extreme Danger: Zero Tolerance During Conflict</strong>
+        Iran is currently under military strikes and on maximum security alert. Any drone — even a tiny consumer quadcopter — will be treated as a potential hostile surveillance device. Bringing a drone into Iran right now would almost certainly result in immediate arrest, confiscation of all your equipment, and potentially lengthy imprisonment on espionage charges. Do not even consider it.
+      </div>
+
+      <h3>Permit Process (Academic — Not Recommended)</h3>
+      <p>In normal peacetime, a foreign visitor would need to: obtain written approval from the Ministry of Defence and Armed Forces; register the drone with CAOI; obtain a local sponsor/operator permit. This process typically takes months, is rarely granted to foreign nationals, and is currently suspended during the conflict.</p>
+
+      <div class="callout callout-orange">
+        <strong>TripTrust Verdict:</strong> Leave your drone at home. Do not attempt to bring it across the Iranian border under any circumstances, now or in the near future.
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. GETTING AROUND -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🚇</span>
+      <h2>7. Getting Around Tehran</h2>
+    </div>
+    <div class="card-body">
+      <div class="callout callout-red">
+        <strong>⚠ Conflict Impact on Transport</strong>
+        Infrastructure including roads and transport hubs may be damaged. Airport operations may be disrupted. Check real-time updates before any movement.
+      </div>
+
+      <h3>Metro (Tehran Metro)</h3>
+      <p>Tehran has an extensive metro system (9 lines) covering most of the city. Affordable (~5,000–10,000 Toman/trip), safe, and air-conditioned. Women-only carriages at front and rear. Excellent for business districts. Note: separate carriages for men and women are recommended.</p>
+
+      <h3>Taxis</h3>
+      <p>Official orange taxis (metered) and shared taxis (savari) operate throughout Tehran. Always negotiate fare before boarding for private taxis, or insist on the meter.</p>
+
+      <h3>Snapp (Iranian Ride-Share)</h3>
+      <p>Snapp is Iran's equivalent of Uber and is widely used in Tehran. Requires a local SIM card and Iranian phone number to register. Your hotel concierge can often arrange this. Fixed fares, GPS tracked, generally safer than street taxis.</p>
+
+      <h3>Domestic Flights</h3>
+      <p>Iran Air, Mahan Air, and Iran Aseman Airlines operate domestic routes. Given the current conflict, all domestic aviation may be disrupted or suspended. Airspace may be closed to civilian traffic.</p>
+
+      <h3>Driving</h3>
+      <p>International driving permits are not valid in Iran. Iranian driving standards are erratic. Not recommended for business visitors. Use hired drivers from your hotel.</p>
+    </div>
+  </div>
+
+  <!-- 8. MONEY & BUDGET -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">💰</span>
+      <h2>8. Money & Budget</h2>
+      <span class="badge badge-high">CASH ONLY</span>
+    </div>
+    <div class="card-body">
+      <div class="callout callout-red">
+        <strong>No International Cards Work — Zero Exceptions</strong>
+        Visa, Mastercard, Amex, and all international debit/credit cards are completely blocked in Iran due to US and EU sanctions. Iran is disconnected from SWIFT. There are no ATM withdrawals available. You must carry 100% of your budget in cash.
+      </div>
+
+      <h3>Currency</h3>
+      <div class="info-row"><span class="label">Official Currency</span><span class="value">Iranian Rial (IRR)</span></div>
+      <div class="info-row"><span class="label">Common Usage</span><span class="value">Toman (1 Toman = 10 Rials). Iranians quote in Toman.</span></div>
+      <div class="info-row"><span class="label">Best Cash to Bring</span><span class="value">Euros (EUR) or US Dollars (USD) — easiest to exchange</span></div>
+      <div class="info-row"><span class="label">Exchange</span><span class="value">Exchange at official exchange offices (sarafi). Bank rates are unfavourable. Black market rates exist but carry legal risk.</span></div>
+      <div class="info-row"><span class="label">Exchange Rate (approx.)</span><span class="value">~580,000–620,000 IRR per USD (rate fluctuates significantly, especially during conflict)</span></div>
+
+      <h3>Budget Estimates — Luxury (Money No Object)</h3>
+      <ul class="plain">
+        <li><strong>Luxury hotel (Espinas Palace):</strong> ~€150–300/night (~€4,200–8,400 for 28 nights)</li>
+        <li><strong>Business dining:</strong> €15–40/person per meal</li>
+        <li><strong>Private driver:</strong> €50–100/day</li>
+        <li><strong>Miscellaneous/business:</strong> €100–200/day</li>
+        <li><strong>Emergency reserve:</strong> Carry at minimum €2,000 extra</li>
+      </ul>
+      <p><strong>Recommended total cash for 28-day luxury business trip:</strong> Minimum €8,000–€15,000 equivalent in EUR/USD cash. Store securely — hotel safe recommended.</p>
+
+      <div class="callout callout-orange">
+        <strong>Conflict Impact on Currency</strong>
+        The Iranian Rial is experiencing extreme devaluation due to the conflict. Exchange rates are highly volatile. Factor in significant rate risk and bring more cash than estimated.
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. WHERE TO STAY -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🏨</span>
+      <h2>9. Where to Stay</h2>
+      <span class="badge badge-medium">LUXURY OPTIONS</span>
+    </div>
+    <div class="card-body">
+      <div class="callout callout-red">
+        <strong>⚠ Hotel Safety During Conflict</strong>
+        High-rise luxury hotels in Tehran may be targets or collateral damage. Ensure your accommodation has shelters/basements. Proximity to government or military buildings increases risk.
+      </div>
+
+      <div class="hotel-grid">
+        <div class="hotel-card">
+          <h4>Espinas Palace Hotel</h4>
+          <div class="stars">★★★★★</div>
+          <p>400-room flagship property in the upscale Valiasr district. Marble-clad interiors, panoramic Tehran views, multiple restaurants, business centre. Best-in-class for business travellers. Valiasr area is a premium address.</p>
+        </div>
+        <div class="hotel-card">
+          <h4>Parsian Azadi Hotel</h4>
+          <div class="stars">★★★★★</div>
+          <p>Located near Azadi Tower in western Tehran. Spacious rooms, rooftop restaurant, pool, spa, easy airport access. One of Tehran's most iconic grand hotels. Popular with international business travellers.</p>
+        </div>
+        <div class="hotel-card">
+          <h4>Parsian Esteghlal Hotel</h4>
+          <div class="stars">★★★★★</div>
+          <p>Historic 5-star property in northern Tehran (Chamran Expressway area). Two high-rise towers, extensive meeting facilities, gardens. Long history hosting international delegations.</p>
+        </div>
+      </div>
+
+      <h3>Safe Neighbourhoods for Business Visitors</h3>
+      <ul class="plain">
+        <li><strong>Elahiyeh/Zafaraniyeh</strong> — Upscale northern Tehran, embassies, safe</li>
+        <li><strong>Jordan / Africa</strong> — Diplomatic district, restaurants, hotels</li>
+        <li><strong>Valiasr</strong> — Central/north, upmarket boulevard, good for business</li>
+        <li><strong>Niavaran</strong> — Northern hills, affluent, quieter</li>
+      </ul>
+
+      <p>Avoid staying near government ministries, military installations, or IRGC-affiliated buildings — particularly during the current conflict.</p>
+    </div>
+  </div>
+
+  <!-- 10. WEATHER -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🌤</span>
+      <h2>10. Weather — Late March to Late April</h2>
+    </div>
+    <div class="card-body">
+      <p>Tehran in late March and April enjoys pleasant spring weather. This is one of the nicer times to visit climatically.</p>
+      <div class="info-row"><span class="label">Average Temperature</span><span class="value">15–22°C daytime; 6–12°C at night</span></div>
+      <div class="info-row"><span class="label">Conditions</span><span class="value">Spring — mild and pleasant. Occasional rain showers in March.</span></div>
+      <div class="info-row"><span class="label">April</span><span class="value">Warmer, drier. 18–25°C by late April.</span></div>
+      <div class="info-row"><span class="label">Clothing</span><span class="value">Light layers — T-shirt/shirt under a jacket. Evenings cool.</span></div>
+      <div class="info-row"><span class="label">Nowruz (Persian New Year)</span><span class="value">March 20 — major holiday period. Many businesses close for 1–2 weeks.</span></div>
+      <div class="info-row"><span class="label">Ramadan 2026</span><span class="value">Ramadan runs approximately 1 March – 30 March 2026. Your trip starts March 25 — the final days of Ramadan/Eid al-Fitr. Expect modified dining hours and closures.</span></div>
+      
+      <div class="callout callout-orange">
+        <strong>Nowruz Timing Note</strong>
+        Your trip begins March 25 — just after Nowruz. Many businesses will be closed or operating reduced hours for the first 1–2 weeks of your trip. Business meetings may be impossible until early April.
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. CULTURAL & RELIGIOUS RULES -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🕌</span>
+      <h2>11. Cultural & Religious Rules</h2>
+    </div>
+    <div class="card-body">
+      <h3>Dress Code</h3>
+      <p><strong>Mandatory for all visitors</strong> — Iranian law requires adherence to Islamic dress code.</p>
+      <ul class="plain">
+        <li><strong>Women:</strong> Hijab mandatory in public — hair covering (scarf/headscarf), loose-fitting clothing covering arms and legs. Manteau (long coat) recommended for business.</li>
+        <li><strong>Men:</strong> Long trousers required. Short-sleeved shirts acceptable but long sleeves preferred in formal settings. No shorts in public.</li>
+        <li>Business attire should be conservative and professional.</li>
+      </ul>
+
+      <h3>Alcohol</h3>
+      <div class="callout callout-red">
+        <strong>Alcohol is completely illegal in Iran</strong>
+        Possession or consumption of alcohol by non-Muslims is technically illegal and can result in fines or flogging (rarely applied to foreigners but theoretically possible). Luxury hotels do not serve alcohol. Plan accordingly.
+      </div>
+
+      <h3>Friday Closures</h3>
+      <p>Friday is the Islamic day of rest. Most government offices, banks, and many businesses are closed on Fridays. Some businesses also close Thursday afternoons. Plan business meetings for Saturday–Wednesday.</p>
+
+      <h3>Business Etiquette</h3>
+      <ul class="plain">
+        <li>Relationships are paramount — invest time in personal rapport before business</li>
+        <li>Appointments should be made 4–6 weeks in advance; confirm on arrival</li>
+        <li>Business cards: present and receive with both hands</li>
+        <li>Gender dynamics: male visitors should wait for women to extend hand first</li>
+        <li>Ta'arof (ritual politeness/offering) is a cultural cornerstone — always decline offers twice before accepting</li>
+        <li>Gift-giving is common; avoid alcohol, pork, or politically sensitive items</li>
+        <li>Meetings often run long and relationship-driven; patience is essential</li>
+        <li>Punctuality: be punctual yourself; your Iranian counterparts may not be</li>
+      </ul>
+
+      <h3>Ramadan (March 25 — Final Days)</h3>
+      <p>Your trip begins during the final days of Ramadan 2026. Eating, drinking, or smoking in public during daylight is prohibited by law — fines apply. Hotel restaurants serve food. Eid al-Fitr (end of Ramadan) will fall around March 30 — a major holiday. Many businesses will be closed.</p>
+
+      <h3>Digital & Communication Rules</h3>
+      <ul class="checklist warn">
+        <li>Many Western social media platforms blocked (Instagram, Facebook, Twitter/X, WhatsApp)</li>
+        <li>VPNs are widely used by Iranians but technically illegal</li>
+        <li>Encrypted messaging may attract attention</li>
+        <li>Photography of government buildings, military, protests strictly prohibited</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 12. EMERGENCY CONTACTS -->
+  <div class="card">
+    <div class="card-header">
+      <span class="icon">🆘</span>
+      <h2>12. Emergency Contacts</h2>
+    </div>
+    <div class="card-body">
+      <div class="callout callout-red">
+        <strong>⚠ Australian Embassy Tehran — Operations SUSPENDED</strong>
+        As of March 2026, the Australian Embassy in Tehran has shut down due to the active conflict. Contact the 24-hour Consular Emergency Centre in Canberra for all consular matters.
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="label">🇦🇺 Australian Consular Emergency</div>
+          <div class="number">+61 2 6261 3305</div>
+          <div class="desc">24/7 — from anywhere in the world</div>
+        </div>
+        <div class="contact-card">
+          <div class="label">🇦🇺 From Within Australia</div>
+          <div class="number">1300 555 135</div>
+          <div class="desc">DFAT Smartraveller 24hr line</div>
+        </div>
+        <div class="contact-card">
+          <div class="label">🚓 Iranian Police</div>
+          <div class="number">110</div>
+          <div class="desc">Emergency police — Tehran</div>
+        </div>
+        <div class="contact-card">
+          <div class="label">🚑 Ambulance</div>
+          <div class="number">115</div>
+          <div class="desc">Medical emergency</div>
+        </div>
+        <div class="contact-card">
+          <div class="label">🔥 Fire</div>
+          <div class="number">125</div>
+          <div class="desc">Fire brigade</div>
+        </div>
+        <div class="contact-card">
+          <div class="label">🏥 Milad Hospital</div>
+          <div class="number">+98 21 8480</div>
+          <div class="desc">Largest hospital complex in Iran</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:20px;">Australian Embassy Tehran (When Operational)</h3>
+      <div class="info-row"><span class="label">Address</span><span class="value">No. 13, 23rd Street, Khalid Islambuli Avenue, Tehran</span></div>
+      <div class="info-row"><span class="label">Status</span><span class="value" style="color:var(--red);font-weight:700;">SUSPENDED — Operations closed due to active conflict</span></div>
+      <div class="info-row"><span class="label">Website</span><span class="value">iran.embassy.gov.au</span></div>
+      <div class="info-row"><span class="label">Smartraveller</span><span class="value">smartraveller.gov.au/destinations/middle-east/iran</span></div>
+    </div>
+  </div>
+
+  <!-- 13. RISK PROFILE MATRIX -->
+  <div class="card full">
+    <div class="card-header">
+      <span class="icon">📊</span>
+      <h2>13. Risk Profile Matrix</h2>
+    </div>
+    <div class="card-body">
+      <table class="risk-matrix">
+        <thead>
+          <tr>
+            <th>Risk Category</th>
+            <th>Risk Level</th>
+            <th>Assessment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Active Military Conflict</strong></td>
+            <td><span class="badge badge-extreme">EXTREME</span></td>
+            <td>US–Israel strikes hitting Tehran directly. Ongoing as of March 2026.</td>
+          </tr>
+          <tr>
+            <td><strong>Arbitrary Detention</strong></td>
+            <td><span class="badge badge-critical">CRITICAL</span></td>
+            <td>Australia–Iran diplomatic relations severed. High risk for Australian passport holders.</td>
+          </tr>
+          <tr>
+            <td><strong>Terrorism</strong></td>
+            <td><span class="badge badge-critical">CRITICAL</span></td>
+            <td>IRGC and counter-terror ops actively underway. Heightened during conflict.</td>
+          </tr>
+          <tr>
+            <td><strong>Civil Unrest</strong></td>
+            <td><span class="badge badge-high">HIGH</span></td>
+            <td>Ongoing protests, security crackdowns. Increased instability during war.</td>
+          </tr>
+          <tr>
+            <td><strong>Consular Access</strong></td>
+            <td><span class="badge badge-extreme">NONE</span></td>
+            <td>Australian Embassy Tehran suspended. No in-country consular support.</td>
+          </tr>
+          <tr>
+            <td><strong>Financial Access</strong></td>
+            <td><span class="badge badge-critical">CRITICAL</span></td>
+            <td>Zero international card/ATM access. Cash-only economy. Currency in freefall.</td>
+          </tr>
+          <tr>
+            <td><strong>Medical Facilities</strong></td>
+            <td><span class="badge badge-high">HIGH</span></td>
+            <td>13+ hospitals damaged. Medical capacity severely strained. Insurance void in war zones.</td>
+          </tr>
+          <tr>
+            <td><strong>Transport / Exit Routes</strong></td>
+            <td><span class="badge badge-critical">CRITICAL</span></td>
+            <td>Airports and transport infrastructure may be targeted or closed. Exit risk real.</td>
+          </tr>
+          <tr>
+            <td><strong>Crime</strong></td>
+            <td><span class="badge badge-medium">MEDIUM</span></td>
+            <td>Pre-conflict: relatively low. War conditions creating economic desperation. Cash risk elevated.</td>
+          </tr>
+          <tr>
+            <td><strong>Drone / Equipment</strong></td>
+            <td><span class="badge badge-extreme">EXTREME</span></td>
+            <td>Immediate confiscation at border. Espionage charges probable during active conflict.</td>
+          </tr>
+          <tr>
+            <td><strong>Weather</strong></td>
+            <td><span class="badge badge-low">LOW</span></td>
+            <td>Spring weather is mild and pleasant. 15–22°C. Not a risk factor.</td>
+          </tr>
+          <tr>
+            <td><strong>Cultural Compliance</strong></td>
+            <td><span class="badge badge-medium">MEDIUM</span></td>
+            <td>Strict dress code, alcohol ban, Ramadan rules. Legal risk if ignored.</td>
+          </tr>
+          <tr>
+            <td><strong>Sanctions / Legal Risk</strong></td>
+            <td><span class="badge badge-high">HIGH</span></td>
+            <td>Australian businesses must comply with Australian sanctions on Iran. Legal advice essential.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="gonogo" style="margin-top: 24px;">
+        <div class="label">Overall TripTrust Risk Rating</div>
+        <div class="verdict">EXTREME / DO NOT TRAVEL</div>
+        <div class="reason">
+          Iran is currently an active military conflict zone. Tehran has sustained direct strikes. The Australian Embassy is closed. All Western government advisories are at their highest level. We recommend this trip does not proceed. Monitor DFAT Smartraveller (smartraveller.gov.au) for updates and only reconsider if the advisory drops to Level 2 or below, the embassy reopens, and the conflict fully resolves.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end section-grid -->
+</div><!-- end container -->
+
+<footer>
+  <strong>TripTrust Travel Safety Intelligence</strong><br>
+  Report generated: 11 March 2026 &nbsp;·&nbsp; Destination: Tehran, Iran &nbsp;·&nbsp; Passport: Australian<br>
+  Travel Dates: 25 March – 22 April 2026 &nbsp;·&nbsp; Purpose: Business &nbsp;·&nbsp; Duration: 28 days<br><br>
+  <em>This report is based on publicly available information from DFAT Smartraveller, FCDO, US State Department, WHO, ISW, and open-source intelligence as of the report date. Situations can change rapidly — always check the latest advisories before travel. This report does not constitute legal or professional advice. TripTrust accepts no liability for decisions made based on this report.</em>
+</footer>
+
+</body>
+</html>
